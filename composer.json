@@ -1,0 +1,15 @@
+{
+    "name": "smalot/expect",
+    "description": "Allows to interact with processes through PTY.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastien Malot",
+            "email": "sebastien@malot.fr"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {"Smalot\\Expect\\": "src/Smalot/Expect"}
+    }
+}

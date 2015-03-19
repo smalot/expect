@@ -130,6 +130,9 @@ class Expect
             fclose($this->pipes[1]);
             fclose($this->pipes[2]);
             unset($this->pipes);
+
+            proc_terminate($this->process, 15);
+            proc_close($this->process);
             unset($this->process);
         }
 
@@ -165,6 +168,10 @@ class Expect
             throw new \Exception('Process not running.');
         }
 
+        /*echo "\n--------------------------------\n";
+        echo "$command\n";
+        echo "--------------------------------\n";*/
+
         fwrite($this->pipes[0], $command.($new_line ? PHP_EOL : ''));
 
         return $this;
@@ -198,10 +205,12 @@ class Expect
             }
 
             // Retrieve new char from standard input.
-            $char = stream_get_contents($this->pipes[1], 1);
+            $char = stream_get_contents($this->pipes[1], 1024);
 
             if ($char !== '') {
                 $buffer .= $char;
+
+                //echo $buffer . "\n";
 
                 // Look for matching case.
                 if ($case = $this->checkCases($cases, $match, $buffer)) {
@@ -217,8 +226,8 @@ class Expect
 
                 // Wait 0.5 ms for the next char.
                 // Avoid cpu overload.
-                usleep(500);
-                echo '+';
+                usleep(100);
+                //echo '+';
             }
         } while (true);
     }

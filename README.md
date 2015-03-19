@@ -41,7 +41,7 @@ while (1) {
 while (1) {
 	switch ($expect->expect(
 	  array(
-		'command line' => array('/(.*)[\r\n]+([^\n]+#p)/mis', Expect::EXP_REGEXP),
+		'command line' => array('/(.*)[\r\n]+([^\n]+#)/mis', Expect::EXP_REGEXP),
 	  ),
 	  $match
 	)) {

@@ -210,7 +210,7 @@ class Expect
             if ($char !== '') {
                 $buffer .= $char;
 
-                //echo $buffer . "\n";
+                //echo $buffer."\n";
 
                 // Look for matching case.
                 if ($case = $this->checkCases($cases, $match, $buffer)) {
@@ -240,6 +240,8 @@ class Expect
      */
     protected function checkCases($cases, &$match, $buffer)
     {
+        reset($cases);
+
         foreach ($cases as $case => $condition) {
             // Default is GLOB type.
             $type = isset($condition[1]) ? $condition[1] : '';
